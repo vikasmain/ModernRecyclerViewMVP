@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements DrawerPresenterIm
     public boolean onOptionsItemSelected(MenuItem item) {
      switch (item.getItemId()){
          case R.id.base:
-             startActivity(new Intent(MainActivity.this,HomeActivity.class));
+             startActivity(new Intent(MainActivity.this,Playstoreview.class));
              break;
       }
         return true;    }

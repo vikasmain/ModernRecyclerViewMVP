@@ -5,4 +5,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="navigation_drawer_open">drawer_open</string>
     <string name="navigation_drawer_close">drawer_closed</string>
+    <string name="title_activity_playstoreview">Playstoreview</string>
 </resources>

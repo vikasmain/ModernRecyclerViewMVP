@@ -34,12 +34,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @SuppressWarnings("deprecation")
-public class HomeActivity extends AppCompatActivity implements MvpViewApi, RecyclerItemClickListener{
+public class Playstoreview extends AppCompatActivity implements MvpViewApi, RecyclerItemClickListener{
 
     private static final String TAG = HomeActivity.class.getName();
     PicturePresenterImpl picturePresenter;
     ArrayList<Album> list;
-    @BindView (R.id.recycler_views) RecyclerView recyclerView;
+    @BindView (R.id.recycler_views1) RecyclerView recyclerView;
+    @BindView (R.id.recycler_views2) RecyclerView recyclerView2;
+    @BindView (R.id.recycler_views3) RecyclerView recyclerView3;
+
     @BindView (R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.progress_bar)
@@ -53,7 +56,7 @@ public class HomeActivity extends AppCompatActivity implements MvpViewApi, Recyc
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_playstoreview);
         list=new ArrayList<>();
 //        picturePresenter = new PicturePresenterImpl();
 //        picturePresenter.attachedView2(HomeActivity.this);
@@ -63,7 +66,8 @@ public class HomeActivity extends AppCompatActivity implements MvpViewApi, Recyc
         queue= AppController.getInstance().getRequestQueue();
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);
-
+        recyclerView2.setAdapter(adapter);
+        recyclerView3.setAdapter(adapter);
         preparealbums();
 
         //        navigationView.getMenu().performIdentifierAction(R.id.nav_linear_h, 0);
@@ -82,7 +86,7 @@ public class HomeActivity extends AppCompatActivity implements MvpViewApi, Recyc
     }
 
     public void showMessage(String message) {
-        Toast.makeText(HomeActivity.this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(Playstoreview.this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void setupViews() {
@@ -172,26 +176,15 @@ public class HomeActivity extends AppCompatActivity implements MvpViewApi, Recyc
     }
 
     protected RecyclerView.Adapter getAdapter() {
-        return new AdapterExample(getApplicationContext(),R.layout.item_type_two,list);
+        return new AdapterExample(getApplicationContext(),R.layout.item_type_one,list);
     }
 
     private GridLayoutManager getGridLayoutManager() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(
-                HomeActivity.this,
+        return new GridLayoutManager(
+                Playstoreview.this,
                 2,
-                GridLayoutManager.VERTICAL,
+                GridLayoutManager.HORIZONTAL,
                 false);
-
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                //stagger rows custom
-                return (position % 3 == 0 ? 2 : 1);
-            }
-        });
-
-
-        return gridLayoutManager;
     }
 
 
@@ -206,6 +199,9 @@ public class HomeActivity extends AppCompatActivity implements MvpViewApi, Recyc
     private void setupRecyclerView() {
         if(getLayoutManager() != null)
             recyclerView.setLayoutManager(getLayoutManager());
+        recyclerView2.setLayoutManager(getLayoutManager());
+        recyclerView3.setLayoutManager(getLayoutManager());
+
 //        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
