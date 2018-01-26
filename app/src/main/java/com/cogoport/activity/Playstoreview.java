@@ -182,7 +182,7 @@ public class Playstoreview extends AppCompatActivity implements MvpViewApi, Recy
     private GridLayoutManager getGridLayoutManager() {
         return new GridLayoutManager(
                 Playstoreview.this,
-                2,
+                1,
                 GridLayoutManager.HORIZONTAL,
                 false);
     }

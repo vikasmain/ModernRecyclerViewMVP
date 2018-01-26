@@ -2,6 +2,7 @@ package com.cogoport.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -11,9 +12,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.cogoport.Dagger.DagComponent;
+import com.cogoport.Dagger.DaggerDagComponent;
+import com.cogoport.Dagger.DaggerModule;
+import com.cogoport.Dagger.module.DependentClass;
 import com.cogoport.R;
 import com.cogoport.drawer.DrawerPresenterImpl;
+
+import java.util.Deque;
+import java.util.LinkedList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,8 +34,10 @@ public class MainActivity extends AppCompatActivity implements DrawerPresenterIm
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.nav_view) NavigationView navigationView;
+    @BindView(R.id.t1)
+    TextView textView;
     private DrawerPresenterImpl drawerPresenter;
-
+    private DependentClass dependentClass;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +45,46 @@ public class MainActivity extends AppCompatActivity implements DrawerPresenterIm
         ButterKnife.bind(this);
         setupViews();
         drawerPresenter = new DrawerPresenterImpl(this);
+        DagComponent component = DaggerDagComponent.builder().daggerModule(new DaggerModule()).build();
+
+        dependentClass = component.provideVehicle();
+        String t=dependentClass.getString();
+        if(t!=null)
+        {
+
+            String[] p=t.split(" ");
+            final Deque<String> words=new LinkedList<String>();
+            for(int i=0;i<p.length;i++)
+            {
+                words.addLast(p[i]);
+            }
+            shownext(words);
+
+        }
+                else
+        {
+            Toast.makeText(MainActivity.this, "Sring doesn't exist", Toast.LENGTH_SHORT).show();
+        }
 //        navigationView.getMenu().performIdentifierAction(R.id.nav_linear_h, 0);
     }
 
 
 
+    public void shownext(final Deque<String> w)
+    {
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                textView.append(w.pollFirst()+" ");
+                if(w.size()>0)
+                {
+                    shownext(w);
+                }
+            }
+        },1000);
 
+    }
     @Override public void onBackPressed() {
         setBackPressed();
     }
@@ -86,6 +132,9 @@ public class MainActivity extends AppCompatActivity implements DrawerPresenterIm
      switch (item.getItemId()){
          case R.id.base:
              startActivity(new Intent(MainActivity.this,Playstoreview.class));
+             break;
+         case R.id.base2:
+             startActivity(new Intent(MainActivity.this,HomeActivity.class));
              break;
       }
         return true;    }

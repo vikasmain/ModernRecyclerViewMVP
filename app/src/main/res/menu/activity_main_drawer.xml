@@ -5,25 +5,15 @@
 
     <group android:checkableBehavior="single">
 
-    <item android:title="LinearLayoutManager (vertical)" android:id="@+id/nav_linear_v"/>
+    <item android:title="Item 1" android:id="@+id/i1"/>
 
-    <item android:title="LinearLayoutManager (horizontal)" android:id="@+id/nav_linear_h"/>
+    <item android:title="Item 2" android:id="@+id/i2"/>
 
-    <item android:title="GridLayoutManager (vertical)" android:id="@+id/nav_grid_v"/>
+    <item android:title="Item 3" android:id="@+id/i3"/>
 
-    <item android:title="GridLayoutManager (horizontal)" android:id="@+id/nav_grid_h"/>
+    <item android:title="Item 4" android:id="@+id/i4"/>
 
-    <item android:title="GridLayoutManager + SpanSizeLookup" android:id="@+id/nav_grid_span"/>
 
-    <item android:title="StaggeredGridLayoutManager (vertical)" android:id="@+id/nav_staggered_v"/>
-
-    <item android:title="StaggeredGridLayoutManager (horizontal)" android:id="@+id/nav_staggered_h"/>
-
-    <item android:title="ItemTypes" android:id="@+id/nav_item_types"/>
-
-    <item android:title="Responsive RecyclerView" android:id="@+id/nav_item_responsive"/>
-
-    <item android:title="Responsive RecyclerView (Qualifiers)" android:id="@+id/nav_item_qualifiers"/>
 
 </group>
 

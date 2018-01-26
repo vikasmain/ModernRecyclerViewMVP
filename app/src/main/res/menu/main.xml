@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item android:title="Base"
+<item android:title="PlayStore Activity"
     android:id="@+id/base"
     app:showAsAction="never"></item>
+    <item android:title="Home Activity"
+        android:id="@+id/base2"
+        app:showAsAction="never"></item>
 </menu>

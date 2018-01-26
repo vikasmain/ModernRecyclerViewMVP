@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.caverock.androidsvg.SVG;
 import com.cogoport.R;
 import com.cogoport.model.Album;
-import com.cogoport.model.Picture;
 import com.cogoport.presenter.RecyclerItemClickListener;
 
 import java.io.InputStream;
@@ -33,17 +32,12 @@ public class AdapterExample extends RecyclerView.Adapter<AdapterExample.ExampleH
     Album album;
     private RecyclerItemClickListener recyclerItemClickListener;
     ArrayList<Album> albumList=new ArrayList<>();
-    ArrayList<Picture> albumst2=new ArrayList<>();
 //    public void setRecyclerItemClickListener(RecyclerItemClickListener recyclerItemClickListener) {
 //        this.recyclerItemClickListener = recyclerItemClickListener;
 //    }
 
 
-    public AdapterExample(ArrayList<Picture> pictureList, int itemLayout) {
 
-        albumst2=pictureList;
-        this.itemLayout = itemLayout;
-    }
 
     public AdapterExample(Context context,int itemLayout,ArrayList<Album> albumList) {
         this.context=context;

@@ -1,13 +1,9 @@
 package com.cogoport.presenter;
 
-import com.cogoport.model.LoaderListener;
-import com.cogoport.model.Picture;
 import com.cogoport.view.MvpViewApi;
 
-import java.util.ArrayList;
 
-
-public class PicturePresenterImpl implements Presenter<MvpViewApi>,LoaderListener {
+public class PicturePresenterImpl implements Presenter<MvpViewApi> {
 
     private MvpViewApi pictureMvpView2;
 
@@ -38,8 +34,5 @@ public class PicturePresenterImpl implements Presenter<MvpViewApi>,LoaderListene
 
     }
 
-    @Override public void onFinished(ArrayList<Picture> pictureList) {
-        pictureMvpView2.preparealbums();
-        pictureMvpView2.hideProgress();
-    }
+
 }
