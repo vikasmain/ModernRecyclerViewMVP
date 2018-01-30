@@ -1,4 +1,4 @@
-package com.cogoport.api;
+package com.cogoport.app;
 
 import android.app.Application;
 import android.text.TextUtils;

@@ -4,7 +4,7 @@
 <item android:title="PlayStore Activity"
     android:id="@+id/base"
     app:showAsAction="never"></item>
-    <item android:title="Home Activity"
+    <item android:title="GridView Activity"
         android:id="@+id/base2"
         app:showAsAction="never"></item>
 </menu>

@@ -12,15 +12,11 @@
         app:popupTheme="@style/AppTheme.PopupOverlay" android:background="?attr/colorPrimary" android:id="@+id/toolbar"/>
 
 </android.support.design.widget.AppBarLayout>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frame_container">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/t1"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_marginTop="160dp"
-        android:gravity="center"
+</FrameLayout>
 
-        android:textColor="@android:color/holo_red_dark"/>
 </LinearLayout>

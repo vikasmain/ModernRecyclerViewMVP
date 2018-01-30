@@ -17,7 +17,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.cogoport.R;
 import com.cogoport.adapter.AdapterExample;
-import com.cogoport.api.AppController;
+import com.cogoport.app.AppController;
 import com.cogoport.drawer.DrawerPresenterImpl;
 import com.cogoport.model.Album;
 import com.cogoport.presenter.PicturePresenterImpl;

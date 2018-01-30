@@ -20,49 +20,21 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <Button
-        android:id="@+id/view1"
-        android:layout_width="100dp"
-        android:background="@android:color/holo_green_light"
-        android:layout_alignParentRight="true"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:layout_below="@+id/appbar"
-        android:layout_margin="3dp"
-        android:text="View All" />
     <android.support.v7.widget.RecyclerView android:layout_height="wrap_content"
         android:layout_width="match_parent" android:clipToPadding="false"
-        android:layout_below="@+id/view1"
+        android:layout_below="@+id/appbar"
         android:padding="@dimen/activity_vertical_margin" android:id="@+id/recycler_views1"
         android:layout_margin="5dp"/>
-    <Button
-        android:id="@+id/view2"
-        android:layout_width="100dp"
-        android:background="@android:color/holo_green_light"
-        android:layout_alignParentRight="true"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:layout_below="@+id/recycler_views1"
-        android:layout_margin="3dp"
-        android:text="View All" />
+
     <android.support.v7.widget.RecyclerView android:layout_height="wrap_content"
         android:layout_width="match_parent" android:clipToPadding="false"
-        android:layout_below="@+id/view2"
+        android:layout_below="@+id/recycler_views1"
         android:layout_margin="5dp"
         android:padding="@dimen/activity_vertical_margin" android:id="@+id/recycler_views2"/>
-    <Button
-        android:id="@+id/view3"
-        android:layout_width="100dp"
-        android:background="@android:color/holo_green_light"
-        android:layout_alignParentRight="true"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:layout_below="@+id/recycler_views2"
-        android:layout_margin="3dp"
-        android:text="View All" />
+
     <android.support.v7.widget.RecyclerView android:layout_height="wrap_content"
         android:layout_width="match_parent" android:clipToPadding="false"
-        android:layout_below="@+id/view3"
+        android:layout_below="@+id/recycler_views2"
         android:layout_margin="5dp"
         android:padding="@dimen/activity_vertical_margin" android:id="@+id/recycler_views3"/>
 

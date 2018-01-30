@@ -6,4 +6,5 @@
     <string name="navigation_drawer_open">drawer_open</string>
     <string name="navigation_drawer_close">drawer_closed</string>
     <string name="title_activity_playstoreview">Playstoreview</string>
+    <string name="web"><![CDATA[<a href=\"\">hello</a>]]></string>
 </resources>

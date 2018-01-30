@@ -1,4 +1,4 @@
-package com.cogoport.api;
+package com.cogoport.app;
 
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
