@@ -1,5 +1,5 @@
 # ModernRecyclerViewMVP
-RxJava2+MVP+Retrofit+Volley+Dagger2+Awesome RecyclerView+DependencyInjection+Butterknife
+RxJava2+MVP+Retrofit+Volley+Dagger2+Awesome RecyclerView+DependencyInjection+Butterknife<br>
 <b>Drawer Functionality with MVP architecture</b>
 
 MainActivity.java will call navigationItemSelected() of DrawerPresenterImpl
