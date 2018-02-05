@@ -1,9 +1,11 @@
 package com.cogoport.model;
 
+import com.cogoport.MvpContract.RxjavaRetrofitcontract;
+
 /**
  * Created by dell on 12/30/2016.
  */
-public class Album {
+public class Album implements RxjavaRetrofitcontract.MvpModelApi{
 
 String song,url,artists,cover_image;
 

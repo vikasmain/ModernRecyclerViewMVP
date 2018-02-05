@@ -1,4 +1,4 @@
-package com.cogoport.activity;
+package com.cogoport.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,14 +15,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.cogoport.MvpContract.RxjavaRetrofitcontract;
 import com.cogoport.R;
 import com.cogoport.adapter.AdapterExample;
 import com.cogoport.app.AppController;
 import com.cogoport.drawer.DrawerPresenterImpl;
 import com.cogoport.model.Album;
-import com.cogoport.presenter.PicturePresenterImpl;
-import com.cogoport.presenter.RecyclerItemClickListener;
-import com.cogoport.view.MvpViewApi;
+import com.cogoport.presenter.DataPresenterImpl;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,10 +33,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @SuppressWarnings("deprecation")
-public class HomeActivity extends AppCompatActivity implements MvpViewApi, RecyclerItemClickListener{
+public class HomeActivity extends AppCompatActivity implements RxjavaRetrofitcontract.MvpViewApi{
 
     private static final String TAG = HomeActivity.class.getName();
-    PicturePresenterImpl picturePresenter;
+    DataPresenterImpl picturePresenter;
     ArrayList<Album> list;
     @BindView (R.id.recycler_views) RecyclerView recyclerView;
     @BindView (R.id.toolbar)
@@ -85,7 +84,7 @@ public class HomeActivity extends AppCompatActivity implements MvpViewApi, Recyc
         Toast.makeText(HomeActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 
-    private void setupViews() {
+    public void setupViews() {
         setSupportActionBar(toolbar);
     }
 

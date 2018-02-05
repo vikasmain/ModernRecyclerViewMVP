@@ -1,4 +1,4 @@
-package com.cogoport.activity;
+package com.cogoport.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,14 +15,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.cogoport.MvpContract.RxjavaRetrofitcontract;
 import com.cogoport.R;
 import com.cogoport.adapter.AdapterExample;
 import com.cogoport.app.AppController;
 import com.cogoport.drawer.DrawerPresenterImpl;
 import com.cogoport.model.Album;
-import com.cogoport.presenter.PicturePresenterImpl;
-import com.cogoport.presenter.RecyclerItemClickListener;
-import com.cogoport.view.MvpViewApi;
+import com.cogoport.presenter.DataPresenterImpl;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,10 +33,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @SuppressWarnings("deprecation")
-public class Playstoreview extends AppCompatActivity implements MvpViewApi, RecyclerItemClickListener{
+public class Playstoreview extends AppCompatActivity implements RxjavaRetrofitcontract.MvpViewApi, RxjavaRetrofitcontract.MvpPresenterApi {
 
     private static final String TAG = HomeActivity.class.getName();
-    PicturePresenterImpl picturePresenter;
+    DataPresenterImpl picturePresenter;
     ArrayList<Album> list;
     @BindView (R.id.recycler_views1) RecyclerView recyclerView;
     @BindView (R.id.recycler_views2) RecyclerView recyclerView2;
@@ -89,7 +88,7 @@ public class Playstoreview extends AppCompatActivity implements MvpViewApi, Recy
         Toast.makeText(Playstoreview.this, message, Toast.LENGTH_SHORT).show();
     }
 
-    private void setupViews() {
+    public void setupViews() {
         setSupportActionBar(toolbar);
     }
 
@@ -98,6 +97,17 @@ public class Playstoreview extends AppCompatActivity implements MvpViewApi, Recy
 
         super.onDestroy();
     }
+
+    @Override
+    public void attachedView2() {
+
+    }
+
+    @Override
+    public void detachView() {
+
+    }
+
     @Override
     public void onResume() {
 
@@ -106,6 +116,12 @@ public class Playstoreview extends AppCompatActivity implements MvpViewApi, Recy
     public void onItemClickListener(int position) {
         picturePresenter.onItemSelected(position);
     }
+
+    @Override
+    public void onItemSelected(int position) {
+
+    }
+
     public  void preparealbums()
     {
 

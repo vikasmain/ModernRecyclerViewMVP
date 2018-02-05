@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.cogoport.MvpContract.RxjavaRetrofitcontract;
 import com.cogoport.R;
 import com.cogoport.adapter.RepoAdapter;
 import com.cogoport.api.ApiServiceMain;
@@ -29,8 +30,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-
-public class RxjavaRetrofit extends Fragment {
+//That is, as a developer
+// you don’t have to worry too much about the details of how to perform operations that should occur on different threads.
+public class RxjavaRetrofit extends Fragment implements RxjavaRetrofitcontract.MvpViewRxjava,
+        RxjavaRetrofitcontract.MvpPresenterApi{
 
     @BindView(R.id.re)
     RecyclerView recyclerView;
@@ -57,20 +60,20 @@ public class RxjavaRetrofit extends Fragment {
         progressDialog=new ProgressDialog(getContext());
         ButterKnife.bind(this,v);
         initRecyclerView();
-        loadJSON();
+        load();
         return v;
     }
 
-    private void initRecyclerView() {
+    public void initRecyclerView() {
 
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    private void loadJSON() {
-        progressDialog.show();
-        progressDialog.setMessage("Loading Data");
+    public void load() {
+showProgress();
+showMessage("Loading Data");
         ApiServiceMain requestInterface = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -83,16 +86,53 @@ public class RxjavaRetrofit extends Fragment {
 
     }
 
-    private void handleResponse(List<MainCategoryData> androidList) {
-        progressDialog.hide();
-        list = new ArrayList<>(androidList);
+    public void handleResponse(List<MainCategoryData> androidList) {
+hideProgress();
+list = new ArrayList<>(androidList);
         adapter = new RepoAdapter(list);
         recyclerView.setAdapter(adapter);
     }
 
-    private void handleError(Throwable error) {
-        progressDialog.hide();
-        Toast.makeText(getContext(), "Error "+error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+    public void handleError(Throwable error) {
+hideProgress();
+Toast.makeText(getContext(), "Error "+error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void attachedView2() {
+
+    }
+
+    @Override
+    public void detachView() {
+
+    }
+
+    @Override
+    public void onItemClickListener(int position) {
+
+    }
+
+    @Override
+    public void onItemSelected(int position) {
+
+    }
+
+
+    @Override
+    public void showProgress() {
+        progressDialog.show();
+
+    }
+
+    @Override
+    public void hideProgress() {
+      progressDialog.hide();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        progressDialog.setMessage(message);
+
+    }
 }

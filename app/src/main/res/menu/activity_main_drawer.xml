@@ -9,7 +9,7 @@
 
     <item android:title="Dagger2" android:id="@+id/i2"/>
 
-    <item android:title="Item 3" android:id="@+id/i3"/>
+    <item android:title="Multiple Threads" android:id="@+id/i3"/>
 
     <item android:title="Item 4" android:id="@+id/i4"/>
 
