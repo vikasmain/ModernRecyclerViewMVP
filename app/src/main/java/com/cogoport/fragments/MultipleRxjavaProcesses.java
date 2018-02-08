@@ -1,16 +1,17 @@
 package com.cogoport.fragments;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.cogoport.MvpContract.RxjavaRetrofitcontract;
 import com.cogoport.R;
 import com.cogoport.adapter.RepoAdapter;
 import com.cogoport.api.ApiServiceMain;
@@ -21,7 +22,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
@@ -33,10 +33,10 @@ import static com.cogoport.fragments.RxjavaRetrofit.BASE_URL;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BlankFragment extends Fragment {
+public class MultipleRxjavaProcesses extends Fragment implements RxjavaRetrofitcontract.MultipleMvpViewRxjava{
 
 
-    public BlankFragment() {
+    public MultipleRxjavaProcesses() {
         // Required empty public constructor
     }
 
@@ -44,6 +44,7 @@ public class BlankFragment extends Fragment {
     RecyclerView recyclerView;
     @BindView(R.id.re2)
     RecyclerView recyclerView2;
+    ProgressDialog progressDialog;
 
     View v;
     List<MainCategoryData> list,list2;
@@ -55,51 +56,84 @@ public class BlankFragment extends Fragment {
         // Inflate the layout for this fragment
         v= inflater.inflate(R.layout.fragment_blank, container, false);
         ButterKnife.bind(this,v);
+        progressDialog=new ProgressDialog(getContext());
+        showMessage("Loading");
+        initRecycler();
+        retrofitObject();
+        loadData();
+        return v;
+    }
+
+
+    public void handleResponseLeft(List<MainCategoryData> storeCoupons) {
+        hideProgress();
+        List<MainCategoryData> list = new ArrayList<>(storeCoupons);
+        RepoAdapter adapter = new RepoAdapter(list);
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void handleResponseRight(List<MainCategoryData> storeCoupons) {
+        hideProgress();
+        List<MainCategoryData> list2 = new ArrayList<>(storeCoupons);
+        RepoAdapter adapter2 = new RepoAdapter(list2);
+        recyclerView2.setAdapter(adapter2);
+    }
+
+
+    @Override
+    public void showProgress() {
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        progressDialog.hide();
+    }
+
+    @Override
+    public void initRecycler() {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView2.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getContext());
         recyclerView2.setLayoutManager(layoutManager2);
+    }
+
+    @Override
+    public void loadData() {
+        showProgress();
+        ApiServiceMain s1 = retrofit.create(ApiServiceMain.class);
+
+        s1.maincategorya()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleResponseLeft, this::handleError);
+
+        s1.maincategoryap()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleResponseRight, this::handleError);
+    }
+
+    @Override
+    public void retrofitObject() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        retrofit.create(ApiServiceMain.class).maincategorya()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleRespons, this:: handleError);
-        Observable.just(retrofit.create(ApiServiceMain.class)).subscribeOn(Schedulers.computation())
-                .flatMap(s -> {
-                    Observable<List<MainCategoryData>> couponsObservable
-                            = s.maincategorya().subscribeOn(Schedulers.io());
+    }
 
-                    Observable<List<MainCategoryData>> storeInfoObservable
-                            = s.maincategoryap().subscribeOn(Schedulers.io());
-
-                    return Observable.merge(couponsObservable,storeInfoObservable);
-                }).observeOn(AndroidSchedulers.mainThread()).subscribe(this::handleRespons, this::handleError );
-
-        return v;
+    @Override
+    public void showMessage(String message) {
+      progressDialog.setMessage(message);
     }
 
 
 
-
-    private void handleRespons(List<MainCategoryData> storeCoupons) {
-
-        list = new ArrayList<>(storeCoupons);
-        Log.d("hello",list.toString());
-        adapter = new RepoAdapter(list);
-        recyclerView.setAdapter(adapter);
-        list2 = new ArrayList<>(storeCoupons);//error
-        adapter = new RepoAdapter(list2);
-        recyclerView2.setAdapter(adapter);
-
-
-    }
     public void handleError(Throwable error) {
+        hideProgress();
         Toast.makeText(getContext(), "Error "+error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
     }
     }

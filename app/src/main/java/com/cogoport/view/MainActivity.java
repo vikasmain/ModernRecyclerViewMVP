@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import com.cogoport.Dagger.module.DependentClass;
 import com.cogoport.R;
 import com.cogoport.drawer.DrawerPresenterImpl;
-import com.cogoport.fragments.BlankFragment;
+import com.cogoport.fragments.MultipleRxjavaProcesses;
 import com.cogoport.fragments.Dagger2;
 import com.cogoport.fragments.RxjavaRetrofit;
 
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements DrawerPresenterIm
             transaction.commit();            // Handle the camera action
         }
         else if (id == R.id.i3) {
-            BlankFragment fragment = new BlankFragment();
+            MultipleRxjavaProcesses fragment = new MultipleRxjavaProcesses();
             android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.frame_container, fragment);
             transaction.commit();            // Handle the camera action

@@ -1,9 +1,6 @@
 package com.cogoport.MvpContract;
 
-import android.view.View;
-
 import com.cogoport.model.MainCategoryData;
-import com.cogoport.model.Vikashumain;
 
 import java.util.List;
 
@@ -54,14 +51,15 @@ public interface RxjavaRetrofitcontract {
     }
     interface MultipleMvpViewRxjava {
         void showProgress();
-        void showCoupons(View v);
-        void showCouponsTopStore(View v);
+
         void hideProgress();
-        void getStoreCouponData();
-        void getcouponData();
-        void retrofitobject();
+
+        void initRecycler();
+        void loadData();
+        void handleResponseLeft(List<MainCategoryData> storeCoupons);
+        void handleResponseRight(List<MainCategoryData> storeCoupons);
         void showMessage(String message);
-        void handleResponse(Vikashumain storeCoupons);
+        void retrofitObject();
         void handleError(Throwable error);
 
     }
