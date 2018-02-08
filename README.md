@@ -17,7 +17,18 @@ Notice that one of the library dependency mentioned above is retrofit rxjava ada
 You can set adapter by calling addCallAdapterFactory method on Retrofit.Builder using RxJava2CallAdapterFactory class.<br>
 After this setup, retrofit service call can return rxjava observable objects. So, next step in using retrofit with rxjava is to define service interface which returns observable.<br>
 Finally make a call to service that runs in the background and updates UI with results on android main thread. SubscribeOn makes it run in the background thread and observeOn is what makes it possible to return the execution to main thread to execute subscriber code and update view objects with results from service call. RxAndroid provides AndroidSchedulers class that can get hold of android main thread, on which subscriber gets results.<br>
+<b>Why we prefer Rxjava2 over Asynctask?</b><br>
+1.Error handling<br>
+The first problem that arises from this simple usage is: “What happens if something goes wrong?” Unfortunately, there’s no out-of-the-box solution for this, so what a lot of developers end up doing is subclassing AsyncTask, wrapping the doInBackground() work in a try/catch block, returning a pair of <TResult, Exception> and dispatching to newly defined methods like onSuccess() and onError() based on what happened. (I’ve also seen implementations that just capture a reference to the exception and check it in onPostExcecute().)
 
+This ends up helping a good bit, but now you’re having to write or import extra code for every project you work on, this custom code tends to drift over time, and it’s probably not consistent and predictable from developer to developer and from project to project.<br>
+2.Activity/fragment Lifecycle<br>
+What happens if I back out of the Activity or rotate the device while this AsyncTask is running?” Well, if you’re just sending off some fire-and-forget type of work then you might be ok, but what if you are updating the UI based on the result of that task? If you do nothing to prevent it, you will get a NullPointerException and a resulting crash when trying to access the Activity and/or the views since they are now gone and null.<br>
+3.Caching on Rotation<br>What if your user is staying on the same Activity, but just rotating the device? Canceling it doesn’t necessarily make sense in this case because you may end up having to start the task over again after rotation. Or you may not want to restart it because it mutates some state somewhere in a non-idempotent way, but you do want the result so you can update UI to reflect it.<br>
+4.Composing Multiple web services calls<br>
+Now let’s say we’ve managed to get all of that figured out and working ok, but we now need to make a few network calls back-to-back, each based on the result of the previous call. Or, we might want to make a few network calls in parallel to improve performance and then merge the results together before sending them back to the UI? To run them in parallel, you will have to create a custom executor to pass around since AsyncTasks do not run in parallel by default. And to coordinate parallel threads, you’ll need to dip down into the more complex synchronization patterns using things like CountDownLatchs, Threads, Executors and Futures.<br>
+5.Testability<br>
+To top this all off, if you like to unit test your code, and I hope you do, AsyncTask will again not do you any favors. Testing an AsyncTask is difficult without doing something unnatural that’s most likely fragile and/or hard to maintain. Here’s a post talking about some ways to acheive it successfully.<br>
 <b>Drawer Functionality with MVP architecture</b><br>
 
 MainActivity.java will call navigationItemSelected() of DrawerPresenterImpl
