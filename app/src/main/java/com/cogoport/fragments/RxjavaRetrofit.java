@@ -15,7 +15,6 @@ import com.cogoport.R;
 import com.cogoport.adapter.RepoAdapter;
 import com.cogoport.api.ApiServiceMain;
 import com.cogoport.model.MainCategoryData;
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +26,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
@@ -72,23 +72,22 @@ public class RxjavaRetrofit extends Fragment implements RxjavaRetrofitcontract.M
     }
 
     public void load() {
-showProgress();
-showMessage("Loading Data");
+        showProgress();
+        showMessage("Loading Data");
         ApiServiceMain requestInterface = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(ApiServiceMain.class);
-        Observable<List<MainCategoryData>> observable=requestInterface.maincategoryapi().
+        Observable<List<MainCategoryData>> observable = requestInterface.maincategoryapi().
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        observable.subscribe(this::handleResponse,this::handleError);
-
+        observable.subscribe(this::handleResponse, this::handleError);
     }
 
     public void handleResponse(List<MainCategoryData> androidList) {
-hideProgress();
-list = new ArrayList<>(androidList);
+        hideProgress();
+        list = new ArrayList<>(androidList);
         adapter = new RepoAdapter(list);
         recyclerView.setAdapter(adapter);
     }

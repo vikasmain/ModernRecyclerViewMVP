@@ -20,10 +20,13 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.GithubRepoView
     private Context context;
     String name,id;
     private List<MainCategoryData> gitHubRepos = new ArrayList<>();
+    private List<MainCategoryData> categoryData = new ArrayList<>();
 
     public RepoAdapter(List<MainCategoryData> gitHubRepos) {
         this.gitHubRepos = gitHubRepos;
     }
+
+
     @Override
     public GithubRepoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 

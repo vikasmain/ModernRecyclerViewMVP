@@ -3,7 +3,7 @@ package com.cogoport.MvpContract;
 import android.view.View;
 
 import com.cogoport.model.MainCategoryData;
-import com.cogoport.model.StoreCoupons;
+import com.cogoport.model.Vikashumain;
 
 import java.util.List;
 
@@ -61,9 +61,9 @@ public interface RxjavaRetrofitcontract {
         void getcouponData();
         void retrofitobject();
         void showMessage(String message);
-        void initRecyclerView();
-        void handleResponse(StoreCoupons storeCoupons);
+        void handleResponse(Vikashumain storeCoupons);
         void handleError(Throwable error);
+
     }
 
 }

@@ -15,6 +15,12 @@ public interface ApiServiceMain
     @GET("users/vikashumain/starred")
     Observable<List<MainCategoryData>> maincategoryapi();
 
+    @GET("users/naman14/starred")
+    Observable<List<MainCategoryData>> maincategoryap();
+
+    @GET("users/vikashumain/starred")
+    Observable<List<MainCategoryData>> maincategorya();
+
 
 
 }

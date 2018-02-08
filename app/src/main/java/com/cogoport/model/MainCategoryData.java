@@ -1,5 +1,7 @@
 package com.cogoport.model;
 
+import java.util.List;
+
 public class MainCategoryData {
 
     public  int id;
@@ -16,13 +18,22 @@ public class MainCategoryData {
     public int getId() {
         return id;
     }
-
+    List<Vikashumain> data2;
     public String getName() {
         return name;
     }
 
+    public List<Vikashumain> getData2() {
+        return data2;
+    }
+
+    public void setData2(List<Vikashumain> data2) {
+        this.data2 = data2;
+    }
+
     public void setId(int id) {
         this.id = id;
+
     }
 
     public void setName(String name) {

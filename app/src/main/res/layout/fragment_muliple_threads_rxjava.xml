@@ -7,15 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    >
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/appbar">
-        <android.support.v7.widget.Toolbar android:id="@+id/z_toolbar" android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" android:background="?attr/colorPrimary"
-            android:elevation="4dp" app:layout_scrollFlags="scroll|enterAlways">
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/activity_content"
         android:layout_width="match_parent"
@@ -64,6 +56,7 @@
                     android:layout_marginBottom="16dp"
                     android:layout_marginLeft="8dp"
                     app:layout_constraintLeft_toRightOf="@+id/coupon_count"></TextView>
+
             </android.support.constraint.ConstraintLayout>
 
             <android.support.v4.widget.NestedScrollView
