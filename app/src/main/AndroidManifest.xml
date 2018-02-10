@@ -27,6 +27,14 @@
         <activity
             android:name=".view.Playstoreview"
             android:label="@string/title_activity_playstoreview"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.KotlinActivity"
+            android:label="@string/title_activity_kotlin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.SecondActivity"
+            android:label="@string/title_activity_second"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

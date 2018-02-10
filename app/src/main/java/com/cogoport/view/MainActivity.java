@@ -160,10 +160,15 @@ public class MainActivity extends AppCompatActivity implements DrawerPresenterIm
             transaction.replace(R.id.frame_container, fragment);
             transaction.commit();            // Handle the camera action
         }
+        else if (id == R.id.i4) {
+            startActivity(new Intent(MainActivity.this,KotlinActivity.class));
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main,menu);

@@ -11,7 +11,7 @@
 
     <item android:title="Multiple Threads" android:id="@+id/i3"/>
 
-    <item android:title="Item 4" android:id="@+id/i4"/>
+    <item android:title="Kotlin Basics" android:id="@+id/i4"/>
 
 
 

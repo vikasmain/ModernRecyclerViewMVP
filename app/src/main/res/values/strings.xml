@@ -7,4 +7,6 @@
     <string name="navigation_drawer_close">drawer_closed</string>
     <string name="title_activity_playstoreview">Playstoreview</string>
     <string name="web"><![CDATA[<a href=\"\">hello</a>]]></string>
+    <string name="title_activity_kotlin">KotlinActivity</string>
+    <string name="title_activity_second">SecondActivity</string>
 </resources>

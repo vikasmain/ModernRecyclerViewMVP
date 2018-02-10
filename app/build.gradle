@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -20,6 +20,10 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+    //Although Gradle will compile any Kotlin files it finds in src/main/java, it’s good practice to store your Kotlin files in a dedicated Kotlin directory. Here, you can see that the Kotlin plugin has added a src/main/kotlin declaration to build.gradle, but note that it hasn’t actually created this directory, so we’ll create it ourselves later in this article//
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 }
 
 dependencies {
@@ -27,7 +31,8 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '3.0.0-RC1'
-
+//Adds the Kotlin Standard Library as a project dependency//
+    compile "org.jetbrains.kotlin:kotlin-stdlib:1.2.21"
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
@@ -52,3 +57,5 @@ dependencies {
     implementation files('libs/androidsvg-1.2.1.jar')
 
 }
+
+apply plugin: 'kotlin-android-extensions'
