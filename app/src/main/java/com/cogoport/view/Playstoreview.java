@@ -29,8 +29,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 @SuppressWarnings("deprecation")
 public class Playstoreview extends AppCompatActivity implements RxjavaRetrofitcontract.MvpViewApi, RxjavaRetrofitcontract.MvpPresenterApi {
@@ -38,13 +36,13 @@ public class Playstoreview extends AppCompatActivity implements RxjavaRetrofitco
     private static final String TAG = HomeActivity.class.getName();
     DataPresenterImpl picturePresenter;
     ArrayList<Album> list;
-    @BindView (R.id.recycler_views1) RecyclerView recyclerView;
-    @BindView (R.id.recycler_views2) RecyclerView recyclerView2;
-    @BindView (R.id.recycler_views3) RecyclerView recyclerView3;
+     RecyclerView recyclerView;
+     RecyclerView recyclerView2;
+    RecyclerView recyclerView3;
 
-    @BindView (R.id.toolbar)
+
     Toolbar toolbar;
-    @BindView(R.id.progress_bar)
+
     ProgressBar progressBar;
     RecyclerView.Adapter adapter;
 
@@ -56,10 +54,14 @@ public class Playstoreview extends AppCompatActivity implements RxjavaRetrofitco
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playstoreview);
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        recyclerView=(RecyclerView)findViewById(R.id.recycler_views1);
+        recyclerView2=(RecyclerView)findViewById(R.id.recycler_views2);
+        recyclerView3=(RecyclerView)findViewById(R.id.recycler_views3);
+        progressBar=(ProgressBar)findViewById(R.id.progress_bar);
         list=new ArrayList<>();
 //        picturePresenter = new PicturePresenterImpl();
 //        picturePresenter.attachedView2(HomeActivity.this);
-        ButterKnife.bind(this);
         setupViews();
         setupRecyclerView();
         queue= AppController.getInstance().getRequestQueue();

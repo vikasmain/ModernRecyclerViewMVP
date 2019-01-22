@@ -12,10 +12,10 @@ import retrofit2.http.GET;
 public interface ApiServiceMain
 {
 //we used post here becz here we have parameters .Get and Post works in the same way but post has parameters and get doesn't have.
-    @GET("users/vikashumain/starred")
+    @GET("users/vikashumain/repos")
     Observable<List<MainCategoryData>> maincategoryapi();
 
-    @GET("users/naman14/starred")
+    @GET("users/naman14/repos")
     Observable<List<MainCategoryData>> maincategoryap();
 
     @GET("users/vikashumain/starred")

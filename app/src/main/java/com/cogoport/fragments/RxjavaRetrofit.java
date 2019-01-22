@@ -19,11 +19,11 @@ import com.cogoport.model.MainCategoryData;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -35,13 +35,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RxjavaRetrofit extends Fragment implements RxjavaRetrofitcontract.MvpViewRxjava,
         RxjavaRetrofitcontract.MvpPresenterApi{
 
-    @BindView(R.id.re)
     RecyclerView recyclerView;
     ProgressDialog progressDialog;
     View v;
     List<MainCategoryData> list;
     private RepoAdapter adapter;
-    CompositeDisposable mcompositeDisposable;
     public RxjavaRetrofit() {
         // Required empty public constructor
     }
@@ -58,14 +56,13 @@ public class RxjavaRetrofit extends Fragment implements RxjavaRetrofitcontract.M
          v= inflater.inflate(R.layout.fragment_rxjava_retrofit, container, false);
 
         progressDialog=new ProgressDialog(getContext());
-        ButterKnife.bind(this,v);
         initRecyclerView();
         load();
         return v;
     }
 
     public void initRecyclerView() {
-
+        recyclerView=(RecyclerView)v.findViewById(R.id.re);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -82,15 +79,39 @@ public class RxjavaRetrofit extends Fragment implements RxjavaRetrofitcontract.M
         Observable<List<MainCategoryData>> observable = requestInterface.maincategoryapi().
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-        observable.subscribe(this::handleResponse, this::handleError);
+        observable.subscribe(new Observer<List<MainCategoryData>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(List<MainCategoryData> mainCategoryData) {
+                hideProgress();
+                list = new ArrayList<>(mainCategoryData);
+                adapter = new RepoAdapter(list);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(getContext(), "Error "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 
-    public void handleResponse(List<MainCategoryData> androidList) {
-        hideProgress();
-        list = new ArrayList<>(androidList);
-        adapter = new RepoAdapter(list);
-        recyclerView.setAdapter(adapter);
-    }
+//    public void handleResponse(List<MainCategoryData> androidList) {
+//        hideProgress();
+//        list = new ArrayList<>(androidList);
+//        adapter = new RepoAdapter(list);
+//        recyclerView.setAdapter(adapter);
+//    }
 
     public void handleError(Throwable error) {
 hideProgress();

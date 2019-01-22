@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.GenericRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.caverock.androidsvg.SVG;
 import com.cogoport.R;
@@ -20,15 +19,11 @@ import com.cogoport.presenter.RecyclerItemClickListener;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 
 public class AdapterExample extends RecyclerView.Adapter<AdapterExample.ExampleHolder> {
 
     Context context;
     private int itemLayout;
-    private GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder;
     Album album;
     private RecyclerItemClickListener recyclerItemClickListener;
     ArrayList<Album> albumList=new ArrayList<>();
@@ -72,15 +67,14 @@ public class AdapterExample extends RecyclerView.Adapter<AdapterExample.ExampleH
 
 
     public class ExampleHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.goi)
         TextView title;
-        @BindView(R.id.image)
         ImageView imageView;
 
         public ExampleHolder(View itemView)
         {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            title=(TextView)itemView.findViewById(R.id.goi);
+            imageView=(ImageView)itemView.findViewById(R.id.image);
             itemView.setOnClickListener(this);
 
         }

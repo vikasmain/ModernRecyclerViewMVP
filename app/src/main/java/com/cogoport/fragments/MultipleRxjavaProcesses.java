@@ -20,8 +20,6 @@ import com.cogoport.model.MainCategoryData;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
@@ -40,9 +38,8 @@ public class MultipleRxjavaProcesses extends Fragment implements RxjavaRetrofitc
         // Required empty public constructor
     }
 
-    @BindView(R.id.re1)
+
     RecyclerView recyclerView;
-    @BindView(R.id.re2)
     RecyclerView recyclerView2;
     ProgressDialog progressDialog;
 
@@ -55,7 +52,9 @@ public class MultipleRxjavaProcesses extends Fragment implements RxjavaRetrofitc
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v= inflater.inflate(R.layout.fragment_blank, container, false);
-        ButterKnife.bind(this,v);
+        recyclerView=(RecyclerView)v.findViewById(R.id.re1);
+        recyclerView2=(RecyclerView)v.findViewById(R.id.re2);
+//        ButterKnife.bind(this,v);
         progressDialog=new ProgressDialog(getContext());
         showMessage("Loading");
         initRecycler();

@@ -17,18 +17,15 @@ import com.cogoport.Dagger.module.DependentClass;
 import com.cogoport.R;
 import com.cogoport.drawer.DrawerPresenterImpl;
 import com.cogoport.fragments.MultipleRxjavaProcesses;
-import com.cogoport.fragments.Dagger2;
 import com.cogoport.fragments.RxjavaRetrofit;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity implements DrawerPresenterImpl.DrawerView, NavigationView.OnNavigationItemSelectedListener {
 
 
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
-    @BindView(R.id.nav_view) NavigationView navigationView;
+     Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
 
     private DrawerPresenterImpl drawerPresenter;
     private DependentClass dependentClass;
@@ -36,7 +33,9 @@ public class MainActivity extends AppCompatActivity implements DrawerPresenterIm
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        drawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
+        navigationView=(NavigationView)findViewById(R.id.nav_view);
         setupViews();
         drawerPresenter = new DrawerPresenterImpl(this);
         RxjavaRetrofit rxjavaRetrofit=new RxjavaRetrofit();
@@ -149,10 +148,10 @@ public class MainActivity extends AppCompatActivity implements DrawerPresenterIm
             transaction.commit();            // Handle the camera action
         }
         else if (id == R.id.i2) {
-            Dagger2 fragment = new Dagger2();
-            android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_container, fragment);
-            transaction.commit();            // Handle the camera action
+//            android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//            transaction.r            Dagger2 fragment = new Dagger2();
+//            eplace(R.id.frame_container, fragment);
+//            transaction.commit();    commit        // Handle the camera action
         }
         else if (id == R.id.i3) {
             MultipleRxjavaProcesses fragment = new MultipleRxjavaProcesses();

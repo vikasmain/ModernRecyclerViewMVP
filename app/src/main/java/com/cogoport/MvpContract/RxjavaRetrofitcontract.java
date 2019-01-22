@@ -46,8 +46,8 @@ public interface RxjavaRetrofitcontract {
         void showMessage(String message);
         void load();
         void initRecyclerView();
-        void handleResponse(List<MainCategoryData> androidList);
-        void handleError(Throwable error);
+//        void handleResponse(List<MainCategoryData> androidList);
+//        void handleError(Throwable error);error
     }
     interface MultipleMvpViewRxjava {
         void showProgress();

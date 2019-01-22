@@ -29,19 +29,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 @SuppressWarnings("deprecation")
 public class HomeActivity extends AppCompatActivity implements RxjavaRetrofitcontract.MvpViewApi{
 
     private static final String TAG = HomeActivity.class.getName();
     DataPresenterImpl picturePresenter;
     ArrayList<Album> list;
-    @BindView (R.id.recycler_views) RecyclerView recyclerView;
-    @BindView (R.id.toolbar)
+     RecyclerView recyclerView;
+
     Toolbar toolbar;
-    @BindView(R.id.progress_bar)
+
     ProgressBar progressBar;
     RecyclerView.Adapter adapter;
 
@@ -54,9 +51,11 @@ public class HomeActivity extends AppCompatActivity implements RxjavaRetrofitcon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         list=new ArrayList<>();
+        recyclerView=(RecyclerView)findViewById(R.id.recycler_views);
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        progressBar=(ProgressBar)findViewById(R.id.toolbar);
 //        picturePresenter = new PicturePresenterImpl();
 //        picturePresenter.attachedView2(HomeActivity.this);
-        ButterKnife.bind(this);
         setupViews();
         setupRecyclerView();
         queue= AppController.getInstance().getRequestQueue();

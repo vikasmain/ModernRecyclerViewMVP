@@ -3,8 +3,11 @@ package com.cogoport.svg;
 import android.annotation.TargetApi;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.ImageViewTarget;
 import com.bumptech.glide.request.target.Target;
@@ -17,10 +20,13 @@ import com.bumptech.glide.request.target.Target;
  * @param <T> not used, here to prevent unchecked warnings at usage
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class SvgSoftwareLayerSetter<T> implements RequestListener<T, PictureDrawable> {
+public class SvgSoftwareLayerSetter<T> implements RequestListener<T> {
+
+
+
 
     @Override
-    public boolean onException(Exception e, T model, Target<PictureDrawable> target, boolean isFirstResource) {
+    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<T> target, boolean isFirstResource) {
         ImageView view = ((ImageViewTarget<?>) target).getView();
         if (Build.VERSION_CODES.HONEYCOMB <= Build.VERSION.SDK_INT) {
             view.setLayerType(ImageView.LAYER_TYPE_NONE, null);
@@ -29,8 +35,7 @@ public class SvgSoftwareLayerSetter<T> implements RequestListener<T, PictureDraw
     }
 
     @Override
-    public boolean onResourceReady(PictureDrawable resource, T model, Target<PictureDrawable> target,
-                                   boolean isFromMemoryCache, boolean isFirstResource) {
+    public boolean onResourceReady(T resource, Object model, Target<T> target, DataSource dataSource, boolean isFirstResource) {
         ImageView view = ((ImageViewTarget<?>) target).getView();
         if (Build.VERSION_CODES.HONEYCOMB <= Build.VERSION.SDK_INT) {
             view.setLayerType(ImageView.LAYER_TYPE_SOFTWARE, null);
