@@ -3,10 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.cogoport">
 
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,28 +13,13 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_main">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
-        <activity
-            android:name=".view.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".view.Playstoreview"
-            android:label="@string/title_activity_playstoreview"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".view.KotlinActivity"
-            android:label="@string/title_activity_kotlin"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".view.SecondActivity"
-            android:label="@string/title_activity_second"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".view.KotlinActivity"/>
     </application>
 
 </manifest>
