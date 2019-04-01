@@ -1,0 +1,42 @@
+Android architecture component is also a part of Android jetpack library.
+Android architecture components are:-
+1.Data binding
+2.Lifecycle Aware Components
+3.LiveData
+4.Navigation
+5.Paging
+6.ViewModel
+7.WorkManager
+8.Room
+
+1. Lifecycle Aware Components
+a) it contains LifecycleOwner-example:-Activity/Fragment
+
+b) here we have a class called LifeCycle which have event and name as its enumerators
+now
+each event has its own state
+event           state
+onCreate()      state is CREATED
+onStart()       STARTED
+onPause()       PAUSED
+onResume()      RESUME
+onDestroy()     DESTROY
+onStop()        STOP
+
+c) It contains LifecycleObserver also which keeps tracks of all the lifecycler activities in app.it performs actions
+which depends on lifecyclerowner.
+
+2.ViewModel (R.drawable.viewmodel)
+what does ViewModel does?
+a) Display UI Data-ex:- Persits data in it till activity is not destroyed
+b) Reacts to user actions
+c) Handles OS Communication
+d) Load data from Network/Db
+
+Now doing all things in one class or activity is painfully so ViewModel reduces this workload.ViewModel
+performs all the logical operations and provides the data to the UI.
+so ViewModel survives configuration changes ex:-screen rotation.
+ViewModel is not same as onSaveInstanceState() because in onSaveInstanceState() we can only persists
+small types of data ex:-Boolean,string,Double, but ViewModel is used for large data such as bitmap,userlists etc.
+ViewModel stores and manages UI related data,It Destroyed only if the owner activity is completely
+destroyed,uses for communication between UI and DB.

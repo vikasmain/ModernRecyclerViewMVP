@@ -1,0 +1,27 @@
+https://proandroiddev.com/exploring-s-o-l-i-d-principle-in-android-a90947f57cf0
+
+https://android.jlelse.eu/android-development-the-solid-principles-3b5779b105d2
+
+
+SOLID principles
+1.S=single Responsibility Principle
+what i understood here is don't write code which is not the function of a class example bindviewholder task is only to attaches
+the data not performing calculation over data and doing some arrangements.
+
+2.O=an entity(class,functions,modules) should open for extensions but not for modifications.
+example we shouldn't modify things using if else conditions.
+
+3.L=liskov substitution principle
+a child class should not modify parent class functions example when we overrride parent class functions then it shouldn't
+modify it's functionalities.
+
+4.Interface Segregation Principle = This principale states that once an interface becomes too fat, it needs to be
+split into smaller interfaces so that client of the interface will only know about the methods that pertain to them.
+It means we shouldn't force a thing to implement all those functions of a interface even if it don't need them.we have to
+segregate that interface.
+
+5.Dependency Inversion Principle=
+  1. High-level modules should not depend on low-level modules. Both should depend on abstractions.
+  2. Abstractions should not depend upon details. Details should depend upon abstractions.
+  It means we should not have a dependency of an entity on a High level class which uses it.we shouldn't
+  depend on lower level class.
