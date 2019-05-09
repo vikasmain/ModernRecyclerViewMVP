@@ -16,6 +16,7 @@ android {
     buildTypes {
         debug {
             // shrinkResources true
+            multiDexEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', "Apikey", Weather_API

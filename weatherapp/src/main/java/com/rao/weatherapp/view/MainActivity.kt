@@ -22,6 +22,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.util.Pair
 import android.widget.Toast
 import com.rao.weatherapp.app.App
 import com.google.android.gms.location.*
@@ -135,7 +136,7 @@ class MainActivity : AppCompatActivity(), MainActivityView {
 
     }
 
-    override fun displayForecast(forecastResponse: MutableList<Pair<String, String>>) {
+    override fun displayForecast(forecastResponse: MutableList<kotlin.Pair<String, String>>) {
         val forecastAdapter = ForecastAdpater(forecastResponse, this)
         recycler_view.adapter = forecastAdapter
         recycler_view.startAnimation(slideUp)
