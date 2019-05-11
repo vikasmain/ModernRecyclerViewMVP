@@ -42,3 +42,67 @@ ViewModel stores and manages UI related data,It Destroyed only if the owner acti
 destroyed,uses for communication between UI and DB.
 ViewModel will destroyed only when activity created is completely destroyed.then it will call
 onCleared() method of ViewModel.
+
+3.LiveData
+LiveData is an observable data holder. It lets the components in your app, usually the UI, observe
+LiveData objects for changes.LiveData is that it’s lifecycle-aware, meaning it respects the lifecycle
+state of the app components (activities, fragments) and ensures that LiveData only updates the component
+(the observer) when it’s in an active lifecycle state. This behavior prevents object leaking and
+ensures the app doesn’t do more work than it should.
+The advantages of using a lifecycle aware components such as LiveData include:
+
+No crashes due to stopped activities.
+If the observer’s lifecycle is inactive, such as when an activity is in the back stack, then it
+doesn’t receive any LiveData events.
+Proper configuration changes.
+If an activity or fragment is recreated due to a configuration change (for instance, device rotation),
+it immediately receives the latest available data.
+No memory leaks.
+No need to dispose subscriptions manually. The observers clean up after themselves when their
+associated lifecycle is destroyed.
+
+Uicomponent->observes->LiveData->which observes->LifecycleOwners(Activity/Fragments)
+Ex:- of LiveData let's suppose u want to create a button which will disable when we presses follow button
+and it text becomes following.here livedata works.
+https://proandroiddev.com/when-and-why-to-use-android-livedata-93d7dd949138
+LiveData Features:-
+1.Observable Data holder class.
+2.keeps data and allows data to be observed.
+3.Observe data from appcomponent's onCreate() method.
+4.Benefits of LiveData:-
+keeps the ui updated in case of changes.
+it is automatically destroyed when associated LifeCycleOwner is destroyed.
+https://www.journaldev.com/21168/android-livedata
+
+4.Room:-
+Why use Room?
+Compile-time verification of SQL queries. each @Query and @Entity is checked at the compile time, that preserves your app from crash issues at runtime and not only it checks the only syntax, but also missing tables.
+Boilerplate code
+Easily integrated with other Architecture components (like LiveData)
+Major problems with SQLite usage are
+There is no compile-time verification of raw SQL queries. For example, if you write a SQL query with a wrong column name that does not exist in real database then it will give exception during run time and you can not capture this issue during compile time.
+As your schema changes, you need to update the affected SQL queries manually. This process can be time-consuming and error-prone.
+You need to use lots of boilerplate code to convert between SQL queries and Java data objects (POJO).
+Room is an ORM, Object Relational Mapping library. In other words, Room will map our database objects to Java objects. Room provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
+Difference between SqLite and Room
+In the case of SQLite, There is no compile-time verification of raw SQLite queries. But in Room, there is SQL validation at compile time.
+You need to use lots of boilerplate code to convert between SQL queries and Java data objects. But, Room maps our database objects to Java Object without boilerplate code.
+As your schema changes, you need to update the affected SQL queries manually. Room solves this problem.
+Room is built to work with LiveData and RxJava for data observation, while SQLite does not.
+How Room works?
+1.First create Entity.
+2.Then,define Dao
+3.then Database.
+Components of Room:-
+1.Entities
+  Represents a table within the database. Room creates a table for each class that has @Entity annotation, the fields in the class correspond to columns in the table.
+  defines schema of database table
+  annotated with @Entity
+2.DAO
+  contains methods to access database
+  Annotated with @Dao
+3.Database
+  database holder class
+  Annotated with @Database
+For Live Example Code check this:-
+https://medium.com/mindorks/using-room-database-android-jetpack-675a89a0e942

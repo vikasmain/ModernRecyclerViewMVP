@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".kotlin.KotlinActivity"/>
         <activity android:name=".architectureComponents.MainActivity"/>
+        <activity android:name=".architectureComponents.NewNoteActivity"/>
     </application>
 
 </manifest>

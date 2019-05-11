@@ -1,5 +1,6 @@
 package com.cogoport.architectureComponents
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
 
@@ -10,9 +11,9 @@ import java.util.Random
 class MainActivityViewModel : ViewModel() {
 
     private val TAG = this.javaClass.simpleName
-    private var myRandomNumber: String? = null
+    private var myRandomNumber: MutableLiveData<String>? = null
 
-    val number: String?
+    val number: MutableLiveData<String>?
         get() {
             Log.i(TAG, "Get number")
             if (myRandomNumber == null) {
@@ -24,7 +25,7 @@ class MainActivityViewModel : ViewModel() {
     private fun createNumber() {
         Log.i(TAG, "Create new number")
         val random = Random()
-        myRandomNumber = "Number: " + (random.nextInt(10 - 1) + 1)
+        myRandomNumber?.setValue("Number: " + (random.nextInt(10 - 1) + 1));
     }
 
     override fun onCleared() {
