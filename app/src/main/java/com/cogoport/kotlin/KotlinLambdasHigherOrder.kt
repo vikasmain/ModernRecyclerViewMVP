@@ -1,6 +1,4 @@
-package com.cogoport.utils
-
-import android.support.v7.app.AppCompatActivity
+package com.cogoport.kotlin
 
 class KotlinLambdasHigherOrder {
     //kotlin lambda

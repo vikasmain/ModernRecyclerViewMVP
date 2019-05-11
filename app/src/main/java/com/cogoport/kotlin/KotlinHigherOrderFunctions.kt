@@ -1,4 +1,4 @@
-package com.cogoport.view
+package com.cogoport.kotlin
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

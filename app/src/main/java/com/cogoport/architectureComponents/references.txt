@@ -40,3 +40,5 @@ ViewModel is not same as onSaveInstanceState() because in onSaveInstanceState() 
 small types of data ex:-Boolean,string,Double, but ViewModel is used for large data such as bitmap,userlists etc.
 ViewModel stores and manages UI related data,It Destroyed only if the owner activity is completely
 destroyed,uses for communication between UI and DB.
+ViewModel will destroyed only when activity created is completely destroyed.then it will call
+onCleared() method of ViewModel.

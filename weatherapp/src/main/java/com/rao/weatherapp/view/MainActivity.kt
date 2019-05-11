@@ -22,6 +22,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.RecyclerView
 import android.util.Pair
 import android.widget.Toast
 import com.rao.weatherapp.app.App
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity(), MainActivityView {
         super.onCreate(savedInstanceState)
         setContentView(com.rao.weatherapp.R.layout.activity_main)
 
-        recycler_view.layoutManager = LinearLayoutManager(this@MainActivity)
+        recycler_view.layoutManager = LinearLayoutManager(this@MainActivity) as RecyclerView.LayoutManager?
         val myComponent = DaggerMainActivityComponent
                 .builder()
                 .networkModule(NetworkModule(this@MainActivity))

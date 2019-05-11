@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.d("TAG", "Lifecycle Owner onCreate()")
         lifecycle.addObserver(MainActivityLifecycleObserver())
-        val model: MainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+        val model = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         val myRandomNumber = model.number
         Log.d(TAG, myRandomNumber)
     }
@@ -35,6 +35,4 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "Owners onPause()")
 
     }
-
-
 }

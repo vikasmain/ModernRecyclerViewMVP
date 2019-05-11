@@ -19,7 +19,7 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".view.KotlinActivity"/>
+        <activity android:name=".kotlin.KotlinActivity"/>
         <activity android:name=".architectureComponents.MainActivity"/>
     </application>
 
