@@ -7,13 +7,89 @@ SOLID principles
 1.S=single Responsibility Principle
 what i understood here is don't write code which is not the function of a class example bindviewholder task is only to attaches
 the data not performing calculation over data and doing some arrangements.
+Explain Single Responsibility
+ex:-If you’ve ever taken a deep look at any RecyclerView adapter, you’ve probably noticed that the
+adapter is doing a lot of things. Things the adapter still does:-
+Inflating the View
+Creating the View Holder
+Recycling The View Holder
+Providing item count
+etc.
+
+Since SRP is about single responsibility, you’re probably wondering whether or not some of these
+behaviors should be extracted to adhere to SRP.
+While the Adapter still performs various actions, that is, in fact, what it’s designed to do.
+After all, a RecyclerView adapter is simply an implementation of the Adapter pattern. In this case,
+keeping the view inflation and view holder mechanisms in place does make sense; that’s what this
+class’s responsibility is, and that’s what it does best. However, introducing additional behavior
+(like view logic) breaks SRP and can be avoided by using the Model-View-Presenter pattern or other
+refactorings.
+
 
 2.O=an entity(class,functions,modules) should open for extensions but not for modifications.
 example we shouldn't modify things using if else conditions.
+ex:-let's suppose u have a class called CalculateArea which is calculating area of circle now suppose square,traingle
+comes then
+class CalculateArea{
+if(class=="Circle"){
+area of circle
+}
+else if(class=="Square")
+{
+area of square
+}
+else if(class=="Triangle"){
+area of triangle
+}
+}
+
+now if we add more types of figures then we will only modifies this class which violates our open/closed
+principle.so we will use inheritance here.
+interface Shape{
+public getArea()
+}
+class Circle implements Shape{
+override fun getArea(){}
+}
+class Square implements Shape{
+override fun getArea(){}
+}
+
+class CalculateArea{
+ArrayList<Shape> shapes;
+double area = 0;
+        for (Shape shape : shapes) {
+            area += shape.getArea();
+        }
+        return area;
+}
 
 3.L=liskov substitution principle
-a child class should not modify parent class functions example when we overrride parent class functions then it shouldn't
-modify it's functionalities.
+This means that a sub class should override the methods from a parent class that does not break the functionality of the parent class.
+Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program.
+Liskov’s notion of a behavioral subtype defines a notion of substitutability for mutable […] objects; that is, if S is a
+subtype of T, then objects of type T in a program may be replaced with objects of type S without altering any of the
+desirable properties of that program (e.g., correctness).
+ex:-
+public interface CustomerRepository {
+   List<Customer> getCustomersWithIds(List<Integer> ids);
+}
+
+public class CustomerRepositoryImpl implements CustomerRepository {
+   @Override
+   public List<Customer> getCustomersWithIds(List<Integer> ids) {
+        // Go to API, DB, etc and get the customers.
+        ArrayList<Customer> customers = api.getWholeLottaCustomers(ids);
+        return customers;
+   }
+}
+ArrayList<Integer> ids = getCustomerIds();
+List<Customer> customers = customerRepository.getCustomersWithIds(ids);
+Wait a second…the customer repository needs a List<Integer>, not a ArrayList<Integer>. How can that still work?
+
+This is the Liskov Substitution Principle at work. Since ArrayList<Integer> is a subtype of List<Integer>,
+the program will not falter: We’re replacing the instance of the requested type (List<Integer>) with an
+instance of its subtype (ArrayList<Integer>).
 
 4.Interface Segregation Principle = This principale states that once an interface becomes too fat, it needs to be
 split into smaller interfaces so that client of the interface will only know about the methods that pertain to them.
@@ -25,3 +101,12 @@ segregate that interface.
   2. Abstractions should not depend upon details. Details should depend upon abstractions.
   It means we should not have a dependency of an entity on a High level class which uses it.we shouldn't
   depend on lower level class.
+  our higher-level modules should rely on abstractions (interfaces). Furthermore, our abstractions
+  should not depending on details, they’re also depending upon abstractions.
+  Android UI-> Business Layer-> Data Layer
+  BusinessLayer bl = new BusinessLayer();
+  if we write this in our Activity Ui or Create PresenterImpl object there then we are going into the
+  implementation of that object(Presenter) our activity is not depending on abstraction part of lower
+  layer it is going into the details.so we will @inject MainActivity Presenter interface not its implementation
+  in our activity same for our data layer in business layer android.
+  https://academy.realm.io/posts/donn-felker-solid-part-5/
