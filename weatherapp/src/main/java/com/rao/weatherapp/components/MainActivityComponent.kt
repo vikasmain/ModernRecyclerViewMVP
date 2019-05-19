@@ -8,7 +8,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [NetworkModule::class])
 interface MainActivityComponent {
-    fun inject(activity: MainActivity)
+    fun build(): MainActivityComponent
 }
 
 

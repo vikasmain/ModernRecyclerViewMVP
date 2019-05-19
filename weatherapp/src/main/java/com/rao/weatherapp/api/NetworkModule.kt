@@ -1,11 +1,12 @@
 package com.rao.weatherapp.api
 
 import com.rao.weatherapp.app.App
-import com.rao.weatherapp.presenter.MainActivityPresenterImpl
 import com.rao.weatherapp.view.MainActivityView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import com.rao.weatherapp.presenter.MainActivityPresenter
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit
 
 
 @Module
-class NetworkModule(view: MainActivityView) {
+abstract class NetworkModule(view: MainActivityView) {
     var mainActivityView: MainActivityView
 
     init {
@@ -85,13 +86,11 @@ class NetworkModule(view: MainActivityView) {
         return mainActivityView
     }
 
-    //provides presenter
-    @Provides
-    @Singleton
-    fun providesService(mainActivityView: MainActivityView, networkService: ApiServiceMain):
-            MainActivityPresenterImpl {
-        return MainActivityPresenterImpl(mainActivityView, networkService)
-    }
+
+    @Binds
+    abstract fun bindsMainActivityPresenter(mainActivityPresenter:
+                                                   MainActivityPresenter):
+            MainActivityPresenter
 
     @Provides
     @Singleton

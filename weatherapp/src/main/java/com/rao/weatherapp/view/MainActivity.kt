@@ -27,16 +27,18 @@ import android.util.Pair
 import android.widget.Toast
 import com.rao.weatherapp.app.App
 import com.google.android.gms.location.*
+import com.rao.weatherapp.DepsProvider
 import com.rao.weatherapp.adapter.ForecastAdpater
 import com.rao.weatherapp.components.DaggerMainActivityComponent
 import com.rao.weatherapp.model.Current.WeatherResponse
+import com.rao.weatherapp.presenter.MainActivityPresenter
 import java.util.*
 
 
 class MainActivity : AppCompatActivity(), MainActivityView {
 
     @Inject
-    lateinit var mainActivityPresenter: MainActivityPresenterImpl
+    lateinit var mainActivityPresenter: MainActivityPresenter
 
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -49,11 +51,15 @@ class MainActivity : AppCompatActivity(), MainActivityView {
         setContentView(com.rao.weatherapp.R.layout.activity_main)
 
         recycler_view.layoutManager = LinearLayoutManager(this@MainActivity) as RecyclerView.LayoutManager?
-        val myComponent = DaggerMainActivityComponent
-                .builder()
-                .networkModule(NetworkModule(this@MainActivity))
-                .build()
-        myComponent.inject(this@MainActivity)
+//        val myComponent = DaggerMainActivityComponent
+//                .builder()
+//                .networkModule(NetworkModule(this@MainActivity))
+//                .build()
+//        myComponent.inject(this@MainActivity)
+//        above one was an old way of injecting dependencies using dagger
+
+        //new approach of injecting dependencies in Activity(UI)
+        (applicationContext as DepsProvider).provideDeps().inject(this)
         if (!checkPermission()) {
             requestPermission(PERMISSION_REQUEST_CODE)
         }
