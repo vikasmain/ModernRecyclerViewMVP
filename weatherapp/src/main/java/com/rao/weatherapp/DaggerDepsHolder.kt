@@ -13,6 +13,6 @@ open class DaggerDepsHolder:DepsProvider, Application(){
     }
 }
 
-interface RideDevAppDaggerDepsHolderProvider {
+interface AppDaggerDepsHolderProvider {
     var DepsHolder: DepsProvider
 }
