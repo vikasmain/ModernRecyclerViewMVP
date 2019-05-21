@@ -1,1 +1,1 @@
-include ':app' ,':weatherapp'
+include ':app', ':rxjava' ,':weatherapp'
